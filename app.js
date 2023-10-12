@@ -1,3 +1,7 @@
+const listeElement = document.querySelector("#maListe");
+const bouton = document.querySelector("#btn");
+const nombreInput = document.querySelector("#nbr");
+
 // ALGORITHME CONWAY
 function suiteConway(n) {
     let base = ["1"];
@@ -18,12 +22,7 @@ function suiteConway(n) {
     } return base;
 }
 
-const listeElement = document.querySelector("#maListe");
-const bouton = document.querySelector("#btn");
-const nombreInput = document.querySelector("#nbr");
-
-// BOUTON / AFFICHER RESULTAT
-bouton.addEventListener("click", ()=>{
+function result() {
     const n = nombreInput.value;
     const resultat = suiteConway(n);
     resultat.forEach(function(valeur) {
@@ -31,4 +30,22 @@ bouton.addEventListener("click", ()=>{
         li.textContent = valeur;
         listeElement.appendChild(li);
     });
+}
+
+// BOUTON / AFFICHER RESULTAT
+bouton.addEventListener("click", ()=>{
+    if (nombreInput.value == "") {
+        alert("Merci de remplir le champ.");
+    } else if(nombreInput.value >= 50) {
+        alert("Tu veux faire crash le pc enfaite ?");
+    } else {
+        result();
+    }
+})
+
+document.addEventListener('keypress', (event)=>{
+    if (event.key === "Enter") {
+        event.preventDefault();
+        bouton.click();
+    }
 })
